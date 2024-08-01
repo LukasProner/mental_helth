@@ -18,12 +18,30 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
    var_dump( authentication($conn, $log_email, $log_password));
     if(authentication($conn, $log_email, $log_password)) {
-        // Úspěšné přihlášení
+        $id = getUserId($conn, $log_email);
+        session_regenerate_id(true);
+        $_SESSION["is_logged"] = true;
+        $_SESSION["used_id"] = $id;
     } else {
-        // Neúspěšné přihlášení
+        $error = "Chyba pri prihlaseni";
     }
-
-
-
-
 }
+
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php if(!empty($error)): ?>
+        <p><?= $error ?></p>
+        <a href="../signin.php">Zpět na přihlášení</a>
+    <?php endif; ?>
+</body>
+</html>
