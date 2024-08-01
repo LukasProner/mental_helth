@@ -1,0 +1,5 @@
+@media (max-width: 400px){
+    .main-heading h1 {
+        font-size: 40px;
+    }
+}

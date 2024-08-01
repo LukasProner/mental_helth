@@ -1,0 +1,56 @@
+@media (max-width: 800px) {
+    .menu-icon {
+        display: block;
+        color: white;
+        font-size: 23px;
+        position: absolute;
+        right: 20px;
+    }
+    header nav {
+        position: absolute;
+        top: 70px;
+        background-color: #060606;
+        width: 100%;
+    }
+     nav ul {
+        display: block;
+    } 
+
+    header nav li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+
+    }
+    nav a {
+        display: block; /* Ensure each link takes up full width */
+        text-align: center; /* Center text and icons within the links */
+    }
+}
+/* @media (max-width: 800px){
+
+
+    header nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        background-color: #060606;
+        width: 100%;
+    }
+
+
+    header nav li {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+
+    .menu-icon {
+        display: block;
+        color: white;
+        font-size: 23px;
+        margin-right: 20px;
+    }
+} */
