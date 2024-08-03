@@ -46,7 +46,8 @@ function authentication($connection, $log_email, $log_password) {
                 if($user_password_database) {
                     return password_verify($log_password, $user_password_database);
                 }
-            else{echo "chyba v emaily"}
+            else{echo "chyba v emaily";}
+            }
         }
 
 

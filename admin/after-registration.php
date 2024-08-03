@@ -8,7 +8,6 @@ require "../assets/user.php";
 
 session_start();
 
-
 if($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
@@ -31,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         // Nastavenie id uzivatela
         $_SESSION["user_id"] = $id;
 
-        changeUrl("/mentalHealth/zoznam_testov.php");//zmen potom podla uz uvidim
+        changeUrl("/mentalHealth/admin/zoznam_testov.php");//zmen potom podla uz uvidim
     } else {
         echo "Uživatele se nepodařilo přidat";
     }
