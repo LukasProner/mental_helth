@@ -1,22 +1,24 @@
 <?php
     
-    require "../assets/database.php";
-    require "../assets/logged_control.php";
+    require "../classes/Database.php";
+    require "../classes/LoggedControl.php";
+    require "../classes/Poruchy.php";
     session_start();
     
-    if ( !isLogged() ){
+    if ( !LoggedControl::isLogged() ){
         die("Nepovolený přístup");
     }
+    $database = new Database;
+    $connection = $database->DBconnection();
 
-    $connection = DBconnection();
-
-    $sql = "SELECT * from poruchy ";
-    $result = mysqli_query($connection, $sql);
-    if ($result === false) {
-        echo mysqli_error($connection);
-    } else {
-        $zoznam = mysqli_fetch_all($result, MYSQLI_ASSOC);    // premenim na pole a ASSOC zmeni na asociativne pole
-    }
+    // $sql = "SELECT * from poruchy ";
+    // $result = mysqli_query($connection, $sql);
+    // if ($result === false) {
+    //     echo mysqli_error($connection);
+    // } else {
+    //     $zoznam = mysqli_fetch_all($result, MYSQLI_ASSOC);    // premenim na pole a ASSOC zmeni na asociativne pole
+    // }
+    $zoznam = Poruchy::getAllDisorders($connection, "id, nazov, informacie");
 
 
 ?>
@@ -47,7 +49,8 @@
                     <li>
                         <?php echo htmlspecialchars($porucha["nazov"])?>
                     </li>
-                    <a href="porucha.php?id=<?= $porucha["id"] ?>">Více informací</a>
+                    <a href="porucha.php?id=<?= $porucha['id'] ?>">Více informací</a>
+
                 <?php endforeach;?>
             </ul>
         <?php endif;?>

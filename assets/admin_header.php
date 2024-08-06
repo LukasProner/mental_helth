@@ -1,7 +1,7 @@
 <header>
     <nav>
         <ul>
-            <li class="nav-home"><a href="index.php"><i class="fa-solid fa-house"></i></a></li>
+            <li class="nav-home"><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="zoznam_testov.php">Zoznam testov</a></li>
             <li><a href="logout.php">Odlasenie</a></li>
         </ul>

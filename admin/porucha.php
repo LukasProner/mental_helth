@@ -1,14 +1,22 @@
 <?php
 
-    require "assets/database.php";
-    $connection = DBconnection();
-    if ( isset($_GET["id"]) and is_numeric($_GET["id"]) ) {
-        $sql = "SELECT *
-                FROM poruchy
-                WHERE id = ". $_GET["id"];
+    require "../classes/Database.php";
+    require "../classes/Poruchy.php";
+    require "../classes/LoggedControl.php";
 
-        $result = mysqli_query($connection, $sql);
-        $poruchy = mysqli_fetch_assoc($result);
+    session_start();
+
+    if ( !LoggedControl::isLogged() ){
+        die("Nepovolený přístup");
+    }
+
+    $database = new Database;
+    $connection = $database->DBconnection();
+    if ( isset($_GET["id"]) and is_numeric($_GET["id"]) ) {
+        $poruchy = Poruchy::getStudent($connection, $_GET["id"]);
+    }
+     else {
+        $poruchy = null;
     }
 
 

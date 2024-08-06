@@ -27,7 +27,7 @@ function createUser($connection, $first_name, $second_name, $email, $password) {
 function authentication($connection, $log_email, $log_password) {
     $sql = "SELECT password
             FROM user
-            WHERE email = ?";
+            WHERE email = :email";
    
     $stmt = mysqli_prepare($connection, $sql);
 

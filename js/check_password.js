@@ -15,6 +15,9 @@ password1.addEventListener("input", () => {
         paragraphText.classList.add("invalid")
         paragraphText.classList.remove("valid")
     }
+    if (password1Value === "" && password2Value === ""){
+        paragraphText.textContent = ""
+    }
 
 })
 password2.addEventListener("input", () => {
@@ -31,4 +34,9 @@ password2.addEventListener("input", () => {
         paragraphText.classList.add("invalid")
         paragraphText.classList.remove("valid")
     }
+    if (password1Value === "" && password2Value === ""){
+        paragraphText.textContent = ""
+    }
 })
+
+

@@ -1,9 +1,12 @@
 <?php
 
 
-require "../assets/url.php";
-require "../assets/database.php";
-require "../assets/user.php";
+// require "../assets/url.php";
+// require "../assets/database.php";
+require "../classes/Database.php";
+require "../classes/Url.php";
+require "../classes/User.php";
+// require "../assets/user.php";
 
 
 session_start();
@@ -11,7 +14,10 @@ session_start();
 if($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
-    $connection = DBconnection();
+    // $connection = DBconnection();
+    $database = new Database();
+    $connection = $database->DBconnection();
+
 
     $first_name = $_POST["first-name"];
     $second_name = $_POST["second-name"];
@@ -20,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
     var_dump($first_name, $second_name, $email, $password);
    
-    $id = createUser($connection,$first_name,$second_name,$email,$password);
+    $id = User::createUser($connection,$first_name,$second_name,$email,$password);
     if(!empty($id)){
         // Zabraňuje fixation attack.
         session_regenerate_id(true);
@@ -30,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         // Nastavenie id uzivatela
         $_SESSION["user_id"] = $id;
 
-        changeUrl("/mentalHealth/admin/zoznam_testov.php");//zmen potom podla uz uvidim
+        Url::changeUrl("/mentalHealth/admin/zoznam_testov.php");//zmen potom podla uz uvidim
     } else {
         echo "Uživatele se nepodařilo přidat";
     }

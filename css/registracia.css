@@ -55,9 +55,11 @@ form{
 
 .valid {
     color: greenyellow;
+    font-size: 20px;
 }
 
 
 .invalid {
     color: red;
+    font-size: 20px;
 }
