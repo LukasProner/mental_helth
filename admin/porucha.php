@@ -9,6 +9,7 @@
     if ( !LoggedControl::isLogged() ){
         die("Nepovolený přístup");
     }
+    $role = $_SESSION["role"];
 
     $database = new Database;
     $connection = $database->DBconnection();
@@ -18,10 +19,7 @@
      else {
         $poruchy = null;
     }
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +41,11 @@
             <?php else: ?>
                 <h2><?= $poruchy["nazov"] ?></h2>
                 <p>Dodatečné informace: <?= $poruchy["informacie"] ?></p>
+                <?php if($role === "admin"): ?>
+                    <div class="one-student-buttons">
+                        <a class="edit-one-student" href="edit-disorder.php?id=<?= $poruchy['id'] ?>">Editovat</a>
+                    </div>
+                <?php endif; ?>
             <?php endif ?>    
         </section>
     </main>

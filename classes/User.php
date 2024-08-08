@@ -2,32 +2,33 @@
 
 class User{
 
-public static function createUser($connection, $first_name, $last_name, $email, $password) {
+public static function createUser($connection, $first_name, $last_name, $email, $password,$role) {
 
 
-    $sql = "INSERT INTO user (first_name, last_name, email, password)
-    VALUES (:first_name, :last_name, :email, :password)";
+    $sql = "INSERT INTO user (first_name, last_name, email, password,role)
+    VALUES (:first_name, :last_name, :email, :password,:role)";
 
 
     // $statement = mysqli_prepare($connection, $sql);
     $stmt = $connection->prepare($sql);
+    $stmt->bindValue(":first_name", $first_name, PDO::PARAM_STR);
+    $stmt->bindValue(":last_name", $last_name, PDO::PARAM_STR);
+    $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+    $stmt->bindValue(":password", $password, PDO::PARAM_STR);
+    $stmt->bindValue(":role", $role, PDO::PARAM_STR);
 
+    try {
+        if($stmt->execute()) {
+            $id = $connection->lastInsertId();
+            return $id;
+        } else {
+            throw new Exception("Vytvoření uživatele selhalo");
+        }
+    } catch (Exception $e) {
+        error_log("Chyba u funkce createUser\n", 3, "../errors/error.log");
+        echo "Typ chyby: " . $e->getMessage();
+    }   
 
-    if ($stmt === false) {
-        echo mysqli_error($connection);
-    } else {
-        // mysqli_stmt_bind_param($statement, "ssss", $first_name, $second_name, $email, $password);
-        $stmt->bindValue(":first_name", $first_name, PDO::PARAM_STR);
-        $stmt->bindValue(":last_name", $last_name, PDO::PARAM_STR);
-        $stmt->bindValue(":email", $email, PDO::PARAM_STR);
-        $stmt->bindValue(":password", $password, PDO::PARAM_STR);
-
-        // mysqli_stmt_execute($statement);
-        $stmt->execute();
-        // $id = mysqli_insert_id($connection);
-        $id = $connection->lastInsertId();
-        return $id;
-    }
 }
 
 public static function authentication($connection, $log_email, $log_password) {
@@ -73,4 +74,26 @@ public static function getUserId($connection,$email){
 
     }
 }
+public static function getUserRole($connection, $id){
+    $sql = "SELECT role FROM user
+            WHERE id = :id";
+
+
+    $stmt = $connection->prepare($sql);
+    $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+
+    try {
+        if($stmt->execute()){
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result["role"];
+        } else {
+            throw new Exception("Získání uživatelské role selhalo");
+        }
+    } catch (Exception $e) {
+        error_log("Chyba u funkce getUserRole\n", 3, "../errors/error.log");
+        echo "Typ chyby: " . $e->getMessage();
+    }      
+}
+
 }

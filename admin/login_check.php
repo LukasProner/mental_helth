@@ -24,6 +24,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         session_regenerate_id(true);
         $_SESSION["is_logged"] = true;
         $_SESSION["used_id"] = $id;
+        $_SESSION["role"] = User::getUserRole($conn, $id);
         Url::changeUrl("/mentalHealth/admin/zoznam_testov.php");
     } else {
         $error = "Chyba pri prihlaseni";

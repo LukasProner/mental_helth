@@ -1,3 +1,8 @@
+
+<?php 
+session_start();
+$logged = isset($_SESSION["is_logged"]) ? $_SESSION["is_logged"] : "false";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +19,17 @@
     <script src="https://kit.fontawesome.com/133aa86f2e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <?php require "assets/header.php"?> 
+<?php
+if ($logged== "true") {
+    require "assets/index_admin_header.php";
+    // require "assets/header.php";
+    echo "logged";
+    echo $logged;
+} else {
+    require "assets/header.php";
+    echo "unlogged";
+}
+?>
 <main>
     <section class="main-heading">
         <h1>Hlavna&nbsp;stranka</h1>

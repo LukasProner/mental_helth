@@ -23,10 +23,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $second_name = $_POST["second-name"];
     $email = $_POST["email"];
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $role = "user";
 
-    var_dump($first_name, $second_name, $email, $password);
+    var_dump($first_name, $second_name, $email, $password,$role);
    
-    $id = User::createUser($connection,$first_name,$second_name,$email,$password);
+    $id = User::createUser($connection,$first_name,$second_name,$email,$password,$role);
     if(!empty($id)){
         // Zabraňuje fixation attack.
         session_regenerate_id(true);
@@ -35,6 +36,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION["is_logged"] = true;
         // Nastavenie id uzivatela
         $_SESSION["user_id"] = $id;
+        $_SESSION["role"] = $role;
 
         Url::changeUrl("/mentalHealth/admin/zoznam_testov.php");//zmen potom podla uz uvidim
     } else {

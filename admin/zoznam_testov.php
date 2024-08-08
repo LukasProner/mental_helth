@@ -6,7 +6,9 @@
     session_start();
     
     if ( !LoggedControl::isLogged() ){
-        die("Nepovolený přístup");
+        // die("Nepovolený přístup");
+        include '../not_logged_in.php';
+        exit;
     }
     $database = new Database;
     $connection = $database->DBconnection();
@@ -32,6 +34,8 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../query/header-query.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/zoznam_testov.css">
+
     <script src="https://kit.fontawesome.com/133aa86f2e.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -41,19 +45,22 @@
         <section class="main-heading">
             <h1>Zoznam poruch</h1>
         </section>
-        <?php if(empty($zoznam)):?>
-            <p> Nikto nebol najdeny </p>
-        <?php else :?>
-            <ul>
-                <?php foreach($zoznam as $porucha):?>
-                    <li>
-                        <?php echo htmlspecialchars($porucha["nazov"])?>
-                    </li>
-                    <a href="porucha.php?id=<?= $porucha['id'] ?>">Více informací</a>
+        <section class= "zoznam">
+            <?php if(empty($zoznam)):?>
+                <p> Nikto nebol najdeny </p>
+            <?php else :?>
+                <ul>
+                    <?php foreach($zoznam as $porucha):?>
+                        <li>
+                            <a href="porucha.php?id=<?= $porucha['id'] ?>">
+                                <?= htmlspecialchars($porucha["nazov"]) ?>
+                            </a>
+                        </li>
 
-                <?php endforeach;?>
-            </ul>
-        <?php endif;?>
+                    <?php endforeach;?>
+                </ul>
+            <?php endif;?>
+        </section>
     </main>
 
     <?php require "../assets/footer.php"?> 

@@ -1,0 +1,73 @@
+main {
+    /* max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+    height: 100vh;
+}
+.zoznam{ max-width: 800px;
+    margin: 20px auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    background: linear-gradient(to bottom, #67b5e98a, #dbedf937);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+.main-heading h1 {
+    font-size: 2em;
+    text-align: center;
+    margin: 20px;
+    color: #333;
+    height: auto;
+}
+
+/* Štýlovanie zoznamu */
+main ul {
+    list-style: none; /* Odstrániť bodky zo zoznamu */
+    padding: 0;
+    margin: 0;
+}
+
+/* Každá položka zoznamu */
+main ul li {
+    margin-bottom: 15px;
+    padding: 10px;
+    /* background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px; */
+    border-bottom: 1px solid #007bff;
+    /* transition: background-color 0.3s ease; */
+}
+
+/* Štýlovanie odkazu */
+main ul li a {
+    text-decoration: none; /* Odstrániť podčiarknutie */
+    font-size: 1.2em;
+    color: #007bff;
+    display: block; /* Celá plocha je klikateľná */
+}
+
+/* Efekt pri hover na položku zoznamu */
+main ul li:hover {
+    /* background-color: #f0f8ff; */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.5s ease;
+}
+
+/* Efekt pri hover na odkaz */
+main ul li a:hover {
+    color: #0056b3;
+}
+
+/* Správa pre prázdny zoznam */
+main p {
+    text-align: center;
+    color: #555;
+    font-size: 1.1em;
+}
